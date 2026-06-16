@@ -240,14 +240,18 @@ So far, I have learned:
 * dotenv
 * MongoDB Basics
 * MongoDB Integration with Node.js
+* Mongoose
+* Schemas
+* Models
+* Creating Documents
 
 ---
 
-## 12. Mongoose (Currently Learning)
+## 12. Mongoose
 
 ### What is Mongoose?
 
-Mongoose is an ODM (Object Data Modeling) library for MongoDB and Node.js.
+Mongoose is an ODM (Object Data Modeling) library for MongoDB and Node.js. It provides a simple way to model application data and interact with MongoDB.
 
 ### Installation
 
@@ -255,9 +259,55 @@ Mongoose is an ODM (Object Data Modeling) library for MongoDB and Node.js.
 npm install mongoose
 ```
 
-### Currently Learning
+### Connecting to MongoDB
 
-* Connecting MongoDB with Node.js using Mongoose
-* Schemas
-* Models
-* CRUD Operations with Mongoose
+```js
+const mongoose = require('mongoose');
+
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('MongoDB Connected'))
+  .catch((err) => console.log(err));
+```
+
+### Schema
+
+A Schema defines the structure of documents in a MongoDB collection.
+
+```js
+const mongoose = require('mongoose');
+
+const userSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  age: Number
+});
+```
+
+### Model
+
+A Model is created from a Schema and is used to interact with the database.
+
+```js
+const User = mongoose.model('User', userSchema);
+```
+
+### Create a Document
+
+```js
+const user = new User({
+  name: 'John',
+  email: 'john@example.com',
+  age: 25
+});
+
+user.save();
+```
+
+### What I Learned
+
+* Installing Mongoose
+* Connecting MongoDB with Node.js
+* Creating Schemas
+* Creating Models
+* Inserting Documents into MongoDB
+* Understanding ODM concepts
